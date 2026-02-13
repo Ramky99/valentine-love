@@ -41,13 +41,13 @@ input,select,button{
 <script>
 function goNext(){
 
- let name=document.getElementById("name").value;
- let msg=document.getElementById("msg").value;
+ let name=document.getElementById("name").value.trim();
+ let msg=document.getElementById("msg").value.trim();
  let frame=document.getElementById("frame").value;
  let file=document.getElementById("photo").files[0];
 
  if(!name || !file){
-   alert("Please enter name and photo");
+   alert("Please enter name and select photo");
    return;
  }
 
@@ -55,18 +55,23 @@ function goNext(){
 
  reader.onload=function(e){
 
+   localStorage.clear();
+
    localStorage.setItem("v_name",name);
    localStorage.setItem("v_msg",msg);
    localStorage.setItem("v_frame",frame);
    localStorage.setItem("v_img",e.target.result);
 
-   window.location.href="result.html";
+   // Force redirect
+   window.location.replace("result.html");
 
- }
+ };
 
  reader.readAsDataURL(file);
 }
 </script>
 
+
 </body>
 </html>
+
